@@ -35,10 +35,6 @@ void processFrames(CascadeClassifier& face_cascade, CascadeClassifier& eye_casca
             queueCondVar.wait(lock, [] {
                 return !frameQueue.empty() || (processingDone && captureDone);
                 });
-            /*if (frameQueue.empty()) {
-                this_thread::sleep_for(chrono::milliseconds(1));
-                continue;
-            }*/
             if (frameQueue.empty() && captureDone) break;
             data = move(frameQueue.front());
             frameQueue.pop();
